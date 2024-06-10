@@ -78,7 +78,7 @@ if st.button("GO"):
             st.write('STEPS: \n', steps)
 
         with st.expander("Content refinement"):   
-            draft = generate_text(WORKER_PROMPT.format(persona=persona, info=BG_INFO, steps=steps), messages, temp=0.2)
+            draft = generate_text(WORKER_PROMPT.format(persona=persona, info=BG_INFO, steps=steps), messages, temp=0.4)
             messages.append({'role': 'assistant', 'content': draft})
             st.markdown('#### DRAFT:')
             st.write(draft)
