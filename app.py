@@ -49,7 +49,7 @@ Craft your responses on the basis of the following information.
 <info>
 {info}
 </info>
-DIRECTIVES: If the user added critcisms or corrections, or reports any violations, take them very seriously while writing the content and adjust accordingly. Do not address the user and do not include any header or footer with the TASK output.
+DIRECTIVES: If the user added critcisms or corrections, or reports any violations, take them into account while writing the content. Do not address the user and do not include any header or footer with the TASK output.
 USER'S REQUIREMENTS: {steps}'''
 
 CRITIC_PROMPT = st.text_area("CRITIC_PROMPT", 
