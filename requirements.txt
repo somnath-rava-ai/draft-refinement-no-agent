@@ -1,0 +1,15 @@
+langchain==0.2.1
+langchain-community==0.2.1
+langchain-core==0.2.3
+langchain-openai==0.1.8
+langchain-text-splitters==0.2.0
+langsmith==0.1.67
+openai==1.30.5
+pydantic==2.7.2
+pydantic_core==2.18.3
+pydeck==0.9.1
+PyYAML==6.0.1
+regex==2024.5.15
+requests==2.32.3
+stack-data==0.6.3
+streamlit==1.35.0
