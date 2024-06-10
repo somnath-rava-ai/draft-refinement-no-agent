@@ -51,18 +51,19 @@ Craft your responses on the basis of the following information.
 {info}
 </info>
 DIRECTIVES: If the user added suggestions, imbibe them while writing the content and adjust accordingly. Do not address the user and do not include any header or footer with the TASK output.
-User REQUIREMENTS: 
+User's REQUIREMENTS that must be followed above all:
 {steps}
 '''
 
 CRITIC_PROMPT = st.text_area("CRITIC_PROMPT", 
-value = '''You are a critical proof reader who is picky about details and obsessed about content quality. Be precise and to the point. 
-
-You are given a list of requirements for a content generation task and the output corresponding to that task. Use the list as guidelines. Suggest improvements to make the output better. Suggest a maximum of 6 improvements. Do not provide anything else.
+value = '''You are an AI proof reader who is picky about details and obsessed about content quality.
+You are given a list of requirements for a content generation task and the output corresponding to that task. Use the requirements as guidelines. 
+Suggest improvements as a list. Suggest a maximum of 5 improvements. Be precise and consise. 
+ Do not provide anything else.
 ''')
 
 #CUSTOM_CRITIC_PROMPT = st.text_area("CUSTOM CRITIC PROMPT", value="")
-NUM_REFINEMENTS = st.number_input('Number of refinement cycles', value=3, step=1)
+NUM_REFINEMENTS = st.number_input('Number of refinement cycles', value=2, step=1)
 CRITIC_PROMPT =CRITIC_PROMPT + """
 {task}
 {steps}"""
@@ -87,7 +88,7 @@ if st.button("GO"):
             st.write(draft)
             for i in range(iters):
                 #st.write('MESSAGES: ', messages)
-                critic = generate_text(CRITIC_PROMPT.format(task = TASK, steps=steps), draft, temp=0.3)
+                critic = generate_text(CRITIC_PROMPT.format(task = TASK, steps=steps), draft, temp=0.2)
                 messages.append({'role': 'human', 'content': critic})
                 st.markdown('#### CRITIQUE')
                 st.write(critic)
