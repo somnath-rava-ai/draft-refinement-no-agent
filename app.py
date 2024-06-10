@@ -1,8 +1,6 @@
 import streamlit as st
 from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
 
-load_dotenv()
 
 def get_llm(family='gpt',model='gpt-3.5-turbo-0125',temperature=0.2):
     if family =='gpt':
