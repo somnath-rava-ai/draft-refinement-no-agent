@@ -1,5 +1,8 @@
 import streamlit as st
 from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def get_llm(family='gpt',model='gpt-3.5-turbo-0125',temperature=0.2):
     if family =='gpt':
@@ -49,13 +52,15 @@ Craft your responses on the basis of the following information.
 <info>
 {info}
 </info>
-DIRECTIVES: If the user added critcisms or corrections, or reports any violations, take them into account while writing the content. Do not address the user and do not include any header or footer with the TASK output.
-USER'S REQUIREMENTS: {steps}'''
+DIRECTIVES: If the user added suggestions, imbibe them while writing the content and adjust accordingly. Do not address the user and do not include any header or footer with the TASK output.
+User REQUIREMENTS: 
+{steps}
+'''
 
 CRITIC_PROMPT = st.text_area("CRITIC_PROMPT", 
-value = '''You are a critical proof reader who is picky about details and obsessed about content quality. Be precise and consise. 
+value = '''You are a critical proof reader who is picky about details and obsessed about content quality. Be precise and to the point. 
 
-You are given a list of requirements for a content generation task and the output corresponding to that task. Use the list as guidelines. Suggest improvements to make the output better. Suggest a maximum of 6 improvements. Also mention any visible violations of the ADDITIONAL REQUIREMENTS for the output content.
+You are given a list of requirements for a content generation task and the output corresponding to that task. Use the list as guidelines. Suggest improvements to make the output better. Suggest a maximum of 6 improvements. Do not provide anything else.
 ''')
 
 #CUSTOM_CRITIC_PROMPT = st.text_area("CUSTOM CRITIC PROMPT", value="")
@@ -78,7 +83,7 @@ if st.button("GO"):
             st.write('STEPS: \n', steps)
 
         with st.expander("Content refinement"):   
-            draft = generate_text(WORKER_PROMPT.format(persona=persona, info=BG_INFO, steps=ADDN_REQ), messages, temp=0.4)
+            draft = generate_text(WORKER_PROMPT.format(persona=persona, info=BG_INFO, steps=ADDN_REQ), messages, temp=0.5)
             messages.append({'role': 'assistant', 'content': draft})
             st.markdown('#### DRAFT:')
             st.write(draft)
@@ -88,7 +93,7 @@ if st.button("GO"):
                 messages.append({'role': 'human', 'content': critic})
                 st.markdown('#### CRITIQUE')
                 st.write(critic)
-                draft = generate_text(WORKER_PROMPT.format(persona=persona, info=BG_INFO, steps=steps), messages[-2:], temp=0.3)
+                draft = generate_text(WORKER_PROMPT.format(persona=persona, info=BG_INFO, steps=steps), messages[-2:], temp=0.2)
                 messages.append({'role': 'assistant', 'content': draft})
                 st.markdown('#### DRAFT:')
                 st.write(draft)
