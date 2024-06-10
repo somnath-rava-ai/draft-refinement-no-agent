@@ -50,7 +50,7 @@ Craft your responses on the basis of the following information.
 {info}
 </info>
 DIRECTIVES: If the user added critcisms or corrections, or reports any violations, take them very seriously while writing the content and adjust accordingly. Do not address the user and do not include any header or footer with the TASK output.
-REQUIREMENTS: {steps}'''
+USER'S REQUIREMENTS: {steps}'''
 
 CRITIC_PROMPT = st.text_area("CRITIC_PROMPT", 
 value = '''You are a critical proof reader who is picky about details and obsessed about content quality. Be precise and to the point. 
@@ -78,7 +78,7 @@ if st.button("GO"):
             st.write('STEPS: \n', steps)
 
         with st.expander("Content refinement"):   
-            draft = generate_text(WORKER_PROMPT.format(persona=persona, info=BG_INFO, steps=steps), messages, temp=0.4)
+            draft = generate_text(WORKER_PROMPT.format(persona=persona, info=BG_INFO, steps=ADDN_REQ), messages, temp=0.4)
             messages.append({'role': 'assistant', 'content': draft})
             st.markdown('#### DRAFT:')
             st.write(draft)
