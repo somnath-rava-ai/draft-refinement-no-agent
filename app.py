@@ -37,6 +37,7 @@ ADDN_REQ = st.text_area("Additional requirements (optional)", value="", placehol
 
 PLANNER_PROMPT = '''Given a content generation task create a list of requirements for that task. Each step must be an independent simple sentence. Be creative with your response.
 For extremely complicated tasks the number of steps can be maximum 10 however for simple task the steps should be much lower. 
+The steps should be only regarding the actual content structure and tone and not about the additional steps like research, proof reading, outlining etc.
 '''
 DELEGATOR_PROMPT = st.text_area("DELEGATOR PROMPT",
                                  value = '''Given a task create a qualitative persona for a large language model bot who will be most suited to perform the task. The output is a short bio about their passions and skills. Start with 'You are a..' '''                           ,
