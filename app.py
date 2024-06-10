@@ -53,7 +53,7 @@ DIRECTIVES: If the user added critcisms or corrections, or reports any violation
 USER'S REQUIREMENTS: {steps}'''
 
 CRITIC_PROMPT = st.text_area("CRITIC_PROMPT", 
-value = '''You are a critical proof reader who is picky about details and obsessed about content quality. Be precise and to the point. 
+value = '''You are a critical proof reader who is picky about details and obsessed about content quality. Be precise and consise. 
 
 You are given a list of requirements for a content generation task and the output corresponding to that task. Use the list as guidelines. Suggest improvements to make the output better. Suggest a maximum of 6 improvements. Also mention any visible violations of the ADDITIONAL REQUIREMENTS for the output content.
 ''')
@@ -88,7 +88,7 @@ if st.button("GO"):
                 messages.append({'role': 'human', 'content': critic})
                 st.markdown('#### CRITIQUE')
                 st.write(critic)
-                draft = generate_text(WORKER_PROMPT.format(persona=persona, info=BG_INFO, steps=steps), messages[-3:], temp=0.2)
+                draft = generate_text(WORKER_PROMPT.format(persona=persona, info=BG_INFO, steps=steps), messages[-2:], temp=0.3)
                 messages.append({'role': 'assistant', 'content': draft})
                 st.markdown('#### DRAFT:')
                 st.write(draft)
