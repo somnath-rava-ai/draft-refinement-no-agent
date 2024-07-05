@@ -13,9 +13,9 @@ dspy.configure(lm=gpt3_turbo)
 class Parse(dspy.Signature):
     """Accept a sales call transcript and generate the relevant outputs"""
     transcript:str = dspy.InputField(desc="Transcript of a sales call between a product seller and a prospective buyer.")
-    summary:str = dspy.OutputField(desc="Rigorously detailedmeeting-minutes by going though the call transcript in a point-wize list.")
     product:str = dspy.OutputField(desc="Name of the specific product being pitched and  its selling point to the client as mentioned in the transcript.")
-    industry:str = dspy.OutputField(desc="Name of Industry of the prospective client's firm.")
+    industry:str = dspy.OutputField(desc="Name of Industry of the prospective client.")
+    summary:str = dspy.OutputField(desc="Rigorously detailedmeeting-minutes by going though the call transcript in a point-wize list.")
     faq:str = dspy.OutputField(desc= "FAQ questions derived from the transcript conversation a that are useful to know and should be added to a FAQ collection, regarding usage, security, product updates etc. The FAQ questions must not address any client directly")
     
 class Ideas(dspy.Signature):
